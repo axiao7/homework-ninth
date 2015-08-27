@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax发送请求到后台</title>
+	<script src="js/ajaxObj.js"></script>
+</head>
+<body>
+	<form action="#" method="#">
+		姓名：<input class="name" type="text">
+		密码: <input class="password" type="password">
+		<input class="submit" type="submit">
+	</form>
+	<script>
+	(function () {
+		var mz = document.querySelector('.name'),
+		    mm = document.querySelector('.password'),
+		    sub = document.querySelector('.submit');
+		sub.addEventListener('click', function () {
+			var userName = mz.value,
+			    userPassword = mm.value,
+			    xhr = ajaxObj.createXhr(),
+			    str;
+			str = ajaxObj.formData({"name":userName,"password":userPassword});
+			ajaxObj.Post(xhr, "php/check.php",function (res) {
+				var respond = JSON.parse(res);
+				console.log(respond);
+			},str);
+		},false);
+	})();
+	</script>
+</body>
+</html>
